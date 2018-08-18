@@ -13,8 +13,8 @@
 * Revision History  :
 *
 * Date          Author   Ref (#)  Revision
-* YYYY-MM-DD     JHG       1      Insert a brief description of the changes
-*                                 made to the SAS program. 
+* YYYY-MM-DD     JHG       1      Added summary of height and weight to printed
+*                                 output. 
 *
 *
 * searchable reference phrase: *** [#] ***;
@@ -24,8 +24,8 @@
 ******************************************************************************/
 option mergenoby=nowarn;
 
-%let root     = /folders/myshortcuts/SAS-UE-Programming/A-lectures;
-%let filePath = &root./01-Basics;
+%let root     = C:/Users/psioda/Documents/GitHub/BIOS-511-FALL-2018;
+%let filePath = &root./2018-08-21-basics;
 
 
 
@@ -35,6 +35,7 @@ ods pdf file="&filepath./classfit.pdf" style=sasweb;
 	proc print data = sashelp.classfit; 
 	run;
 	
+	*** [1] ***;
 	title "Summary statistics for height and weight";
 	proc means data = sashelp.classfit n mean std median min max; 
 		var height weight;
