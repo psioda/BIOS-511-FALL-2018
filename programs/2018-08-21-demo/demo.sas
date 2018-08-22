@@ -9,5 +9,5 @@ title "Print out of the work.class dataset";
 proc print data = work.class; 
 run;
 
-
+proc print
 
