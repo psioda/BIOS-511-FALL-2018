@@ -1,7 +1,7 @@
 /*****************************************************************************
 * Project           : BIOS 511 Course
 *
-* Program name      : template.sas
+* Program name      : template-SS.sas
 *
 * Author            : James Howard Goodnight (JHG)
 *
@@ -24,11 +24,11 @@
 ******************************************************************************/
 option mergenoby=nowarn;
 
-%let root       = /folders/myshortcuts/BIOS-511-FALL-2018/programs/2018-08-22-lecture-01-basics;
+%let root       = C:/Users/psioda/Documents/GitHub/BIOS-511-FALL-2018/programs/2018-08-22-lecture-01-basics;
 %let outputPath = &root./output;
 
 
-/*ods pdf file="&outputPath./classfit-SUE.pdf" style=journal;*/
+ods pdf file="&outputPath./classfit-SS.pdf" style=sasweb;
 
     title "Print out of the sashelp.classfit dataset";
 	proc print data = sashelp.classfit; 
@@ -40,6 +40,6 @@ option mergenoby=nowarn;
 		var height weight;
 	run;
 		
-/*ods pdf close;*/
+ods pdf close;
 
 
