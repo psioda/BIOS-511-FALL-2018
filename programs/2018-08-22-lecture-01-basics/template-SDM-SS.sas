@@ -24,12 +24,11 @@
 ******************************************************************************/
 option mergenoby=nowarn;
 
-%let root     = C:/Users/psioda/Documents/GitHub/BIOS-511-FALL-2018;
-%let filePath = &root./2018-08-21-basics;
+%let root       = /folders/myshortcuts/BIOS-511-FALL-2018/programs/2018-08-22-lecture-01-basics;
+%let outputPath = &root./output;
 
 
-
-ods pdf file="&filepath./classfit.pdf" style=sasweb;
+ods pdf file="&outputPath./classfit-SUE.pdf" style=sasweb;
 
     title "Print out of the sashelp.classfit dataset";
 	proc print data = sashelp.classfit; 
