@@ -2,72 +2,44 @@
  1          OPTIONS NONOTES NOSTIMER NOSOURCE NOSYNTAXCHECK;
  NOTE: ODS statements in the SAS Studio environment may disable some output features.
  73         
- 74         /*****************************************************************************
- 75         * Project           : BIOS 511 Course
- 76         *
- 77         * Program name      : template.sas
- 78         *
- 79         * Author            : James Howard Goodnight (JHG)
- 80         *
- 81         * Date created      : YYYY-MM-DD
- 82         *
- 83         * Purpose           : This program is designed to be a template that can be
- 84         *                     reused throughout the BIOS 511 course.
- 85         *
- 86         * Revision History  :
- 87         *
- 88         * Date          Author   Ref (#)  Revision
- 89         * YYYY-MM-DD     JHG       1      Added summary of height and weight to printed
- 90         *                                 output.
- 91         *
- 92         *
- 93         * searchable reference phrase: *** [#] ***;
- 94         *
- 95         * Note: Standard header taken from :
- 96         *  https://www.phusewiki.org/wiki/index.php?title=Program_Header
- 97         ******************************************************************************/
- 98         option mergenoby=nowarn;
- 99         
- 100        %let root       = /folders/myshortcuts/BIOS-511-FALL-2018/programs/2018-08-22-lecture-01-basics;
- 101        %let outputPath = &root./output;
- 102        
- 103        
- 104        ods pdf file="&outputPath./classfit-SUE.pdf" style=sasweb;
+ 74         
+ 75         %let root       = /folders/myshortcuts/BIOS-511-FALL-2018/programs/2018-08-22-lecture-01-basics;
+ 76         %let outputPath = &root./output;
+ 77         
+ 78         
+ 79         ods pdf file="&outputPath./classfit-SUE.pdf" style=journal;
  NOTE: Writing ODS PDF output to DISK destination 
        "/folders/myshortcuts/BIOS-511-FALL-2018/programs/2018-08-22-lecture-01-basics/output/classfit-SUE.pdf", printer "PDF".
- 105        
- 106            title "Print out of the sashelp.classfit dataset";
- 107        
- 107      !  proc print data = sashelp.classfit;
- 108        run;
+ 80         
+ 81             title "Print out of the sashelp.classfit dataset";
+ 82         
+ 82       !  proc print data = sashelp.classfit;
+ 83         run;
  
  NOTE: There were 19 observations read from the data set SASHELP.CLASSFIT.
  NOTE: PROCEDURE PRINT used (Total process time):
-       real time           0.22 seconds
-       cpu time            0.20 seconds
+       real time           0.25 seconds
+       cpu time            0.26 seconds
        
  
- 109        
- 110        *** [1] ***;
- 111        title "Summary statistics for height and weight";
- 112        
- 112      !  proc means data = sashelp.classfit n mean std median min max;
- 113        var height weight;
- 114        run;
+ 84         
+ 85         *** [1] ***;
+ 86         title "Summary statistics for height and weight";
+ 87         
+ 87       !  proc means data = sashelp.classfit n mean std median min max;
+ 88         var height weight;
+ 89         run;
  
  NOTE: There were 19 observations read from the data set SASHELP.CLASSFIT.
  NOTE: PROCEDURE MEANS used (Total process time):
-       real time           0.10 seconds
-       cpu time            0.09 seconds
+       real time           0.12 seconds
+       cpu time            0.11 seconds
        
  
- 115        
- 116        ods pdf close;
+ 90         
+ 91         ods pdf close;
  NOTE: ODS PDF printed 2 pages to 
        /folders/myshortcuts/BIOS-511-FALL-2018/programs/2018-08-22-lecture-01-basics/output/classfit-SUE.pdf.
- 117        
- 118        
- 119        
- 120        
- 121        OPTIONS NONOTES NOSTIMER NOSOURCE NOSYNTAXCHECK;
- 134        
+ 92         
+ 93         OPTIONS NONOTES NOSTIMER NOSOURCE NOSYNTAXCHECK;
+ 106        

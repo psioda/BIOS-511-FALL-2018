@@ -1,7 +1,7 @@
 /*****************************************************************************
 * Project           : BIOS 511 Course
 *
-* Program name      : template.sas
+* Program name      : template-SUE.sas
 *
 * Author            : James Howard Goodnight (JHG)
 *
@@ -28,7 +28,7 @@ option mergenoby=nowarn;
 %let outputPath = &root./output;
 
 
-/*ods pdf file="&outputPath./classfit-SUE.pdf" style=journal;*/
+ods pdf file="&outputPath./classfit-SUE.pdf" style=journal;
 
     title "Print out of the sashelp.classfit dataset";
 	proc print data = sashelp.classfit; 
@@ -40,6 +40,6 @@ option mergenoby=nowarn;
 		var height weight;
 	run;
 		
-/*ods pdf close;*/
+ods pdf close;
 
 
