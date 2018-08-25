@@ -1,4 +1,4 @@
-%let path=/folders/myshortcuts/BIOS-511-FALL-2018/data/orion; 
+%let path=C:/Users/psioda/Documents/GitHub/BIOS-511-FALL-2018/data/orion; 
 libname orion "&path";
 
 
