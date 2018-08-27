@@ -21,13 +21,13 @@
 option mergenoby=nowarn;
 
 /******************************************************************************
- Q: What if LIBNAME statements did not exist?
+ Q: Can we read in SAS data sets without using a LIBNAME statement?
  
  A: We could always read a data set by referencing is exact location
     via a directory path and the sas data set name.
     
    The following code creates a data set named 'charities' in the 'work' library
-   by reading from a permanent SAS data set name the same thing that
+   by reading from a permanent SAS data set with the same name that
    is stored in the directory 
    'C:/Users/psioda/Documents/GitHub/BIOS-511-FALL-2018/data/orion'    
    
@@ -52,8 +52,8 @@ run;
     repeatedly type the full directory path for the location. A LIBNAME statement
     allows us to give the folder a short alias that can be used in programming.
     
-    The following code using a LIBNAME statement to create a library reference 
-    (aka a libref) to a location where multiple SAS data sets are stored and then
+    The following code uses a LIBNAME statement to create a library reference 
+    (aka a LIBREF) to a location where multiple SAS data sets are stored and then
     prints the contents of some of them.
 *******************************************************************************/
 
@@ -85,5 +85,12 @@ libname dat   "C:/Users/psioda/Documents/GitHub/BIOS-511-FALL-2018/data" access=
 data dat.charities;
  set orion.charities;
 run;
+
+/*
+  ** what does this code actually do?
+  proc sort data = orion.charities;
+    by code;
+  run;
+*/
 
 

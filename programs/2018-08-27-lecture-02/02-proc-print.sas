@@ -85,7 +85,7 @@ run;
    
 /******************************************************************************
  Q: How can we print data listings separately for sets of observations in our
-    data (i.e., a listing of male and female customers)
+    data set (i.e., a listing of male and female customers)
  
  A: You can use two PROC PRINT steps or use a single PROC PRINT step with a 
     BY statement (note the data must be ordered)
@@ -94,8 +94,8 @@ run;
 
 **************************************************************;
 ** option #1 - two PROC PRINT steps;
-title1 j=c color=blue "Data listing for Male Orion Customers";
-footnote1 "Confidential information - please store in a secure environment.";
+title1    j=c color=blue  "Data listing for Male Orion Customers";
+footnote1 j=l color=black "Confidential information - please store in a secure environment.";
 proc print data = orion.customer label;
  where gender = 'M';
 run;
@@ -177,8 +177,11 @@ run;
 title1 j=c color=blue "Data listing for a Subset of Male Orion Customers";
 footnote1 "Confidential information - please store in a secure environment.";
 proc print data = orion.customer(firstobs=10 obs=20) label n;
- ** can you example how firstobs= and obs= work together?;
+ ** can you describe how firstobs= and obs= work together?;
  where gender = 'M';
+ ** how can I modify the WHERE statement so that in addition to only
+    printing data for males, only customers with customer_type_id 
+    at least equal to 2000 are included?;
 run;
 
 
