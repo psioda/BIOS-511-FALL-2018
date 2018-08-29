@@ -79,15 +79,24 @@ libname orion clear;
     a directory on your computer.
 *******************************************************************************/
 
-libname orion "C:/Users/psioda/Documents/GitHub/BIOS-511-FALL-2018/data/orion";
+libname orion ("C:/Users/psioda/Documents/GitHub/BIOS-511-FALL-2018/data"
+               "C:/Users/psioda/Documents/GitHub/BIOS-511-FALL-2018/data/orion");
+
 libname dat   "C:/Users/psioda/Documents/GitHub/BIOS-511-FALL-2018/data" access=read;
 
 data dat.charities;
  set orion.charities;
 run;
 
+** this will work fine;
+proc print data = dat.charities; 
+ where Code  = 'CU2';
+run;
+
+
+
 /*
-  ** what does this code actually do?
+  ** what does this code actually do?;
   proc sort data = orion.charities;
     by code;
   run;

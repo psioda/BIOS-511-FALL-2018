@@ -48,9 +48,11 @@ ods pdf close;
 
 ** define a SAS macro variable named root and give it the value of the "root" directory where your files will go;
 %let root = C:/Users/psioda/Documents/GitHub/BIOS-511-FALL-2018/programs/2018-08-29-lecture-03;
+%let dataset = charities;
 
-ods pdf file="&root/output/file4.pdf";
- proc print data = orion.charities(obs=10); run;
+ods pdf file="&ROOT/output/file4.pdf";
+ title "Print out of Data Set &dAtAsEt";
+ proc print data = orion.&dataset(obs=10); run;
 ods pdf close;
 
 ods pdf file="&root/output/file5.pdf";
