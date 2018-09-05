@@ -21,7 +21,7 @@
 ******************************************************************************/
 
 ** commonly used statements that go just be program header;
-option mergenoby=nowarn ;*nodate nonumber nocenter orientation=landscape;
+option mergenoby=nowarn  date number /*nocenter*/ orientation=portrait;
 
 libname orion "C:/Users/psioda/Documents/GitHub/BIOS-511-FALL-2018/data/orion";
 
