@@ -137,24 +137,36 @@ proc contents data = classI; run;
 /************************* EXCEL FILES *******************************/
 
 
-** Works for SDM v 9.4, SS 3.6, SUE;
-proc import datafile = "&rawPath./class.xls" out = classJ dbms=excel replace; ** 97-2003 excel file;
+** Works for SDM v9.4, SS 3.6;
+proc import datafile = "&rawPath./class.xls" out = classJ dbms=excel replace;   ** 97-2003 excel file;
 sheet='class$';
 run; 
 
+** Works for SDM v9.4, SS 3.6;
 proc import datafile = "&rawPath./class.xlsx" out = classK dbms=excel replace;  ** Current excel type;
 sheet='class$';
 run; 
 
+** Works for SDM v9.4, SS 3.6, SUE;
+proc import datafile = "&rawPath./class.xls" out = classL dbms=xls replace;     ** 97-2003 excel file;
+sheet='class';
+run; 
 
-libname class pcfiles path="&rawPath./class.xls";
-data classL;
+** Works for SDM v9.4, SS 3.6, SUE;
+proc import datafile = "&rawPath./class.xlsx" out = classM dbms=xlsx replace;   ** Current excel type;
+sheet='class';
+run; 
+
+** Works for SDM v9.4, SS 3.6;
+libname class pcfiles path="&rawPath./class.xls";                               ** 97-2003 excel file;
+data classN;
  set class.'class$'n;
 run;
 libname class clear;
 
-libname class pcfiles path="&rawPath./class.xlsx";
-data classM;
+** Works for SDM v9.4, SS 3.6;
+libname class pcfiles path="&rawPath./class.xlsx";                             ** Current excel type;
+data classO;
  set class.'class$'n;
 run;
 libname class clear;
