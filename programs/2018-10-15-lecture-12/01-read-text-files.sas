@@ -26,7 +26,6 @@ footnote;
 %let root     = C:/Users/psioda/Documents/GitHub/BIOS-511-FALL-2018; 
 %let rawPath  = &root./programs/2018-10-15-lecture-12/text.files;
 
-ods html newfile=proc;
 
 ** visualize the dataset to be used;
 title "Print out of the SASHELP.CLASS Dataset";
