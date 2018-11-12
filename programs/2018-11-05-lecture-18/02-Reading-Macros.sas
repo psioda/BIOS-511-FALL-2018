@@ -36,6 +36,28 @@ footnote;
 libname echo "&dataPath";                                             ** use TEXT SUBSTITUION to define the ECHO libref;
 
 
+/*
+
+%macro freqTab4(var4=armcd);
+
+proc freq data = echo.DM noprint order=freq;
+ table &var4. / out = &var4.Dist;
+run;
+
+title1 "Number and Percent of ECHO Trial subjects by &var4.";
+proc print data = &var4.Dist label noobs ;
+ label count   = "n";
+ label percent = "%";
+ format percent 6.2;
+ var &var4. count percent;
+run;
+
+%mend freqTab4;
+
+*/
+
+
+
 ** SAS code to import SAS code from another program.;
 %include "&macroPath./freqTab4.sas" / source;
 
