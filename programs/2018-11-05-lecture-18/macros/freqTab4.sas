@@ -11,7 +11,7 @@
 *                     frequency analysis.
 *
 *                     [1] The macro contains one parameter
-*                         named VAR3 whose values are tablulated by 
+*                         named VAR4 whose values are tablulated by 
 *                         the macro.
 *                     [2] The default value of the VAR4 macro is ARMCD.
 *
