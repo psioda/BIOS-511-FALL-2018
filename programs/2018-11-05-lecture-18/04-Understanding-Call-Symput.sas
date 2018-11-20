@@ -22,9 +22,6 @@ option mergenoby=nowarn nodate nonumber nobyline;
 ods noproctitle;
 title;
 footnote;
-ods html;
-
-
 
 %let root      = C:/Users/psioda/Documents/GitHub/BIOS-511-FALL-2018; ** define the ROOT macro variable;
 %let dataPath  = &root./data/echo;                                    ** use TEXT SUBSTITUTION to define the DATAPATH macro variable;
@@ -51,9 +48,9 @@ proc print data = dm; run;
 *** What is the VALUE of the created macro variable??;
 data _null_;
  set dm;
- call symput(studyid,usubjid);
+ call symput(sex,usubjid);
 run;
-%put /* TBD */;
+%put  &=M &=F;
 
 
 
@@ -65,7 +62,7 @@ run;
 *** What is the VALUE of the created macro variable??;
 data _null_;
  set dm;
- call symput('age',age);
+ call symput('age',strip(put(age,12.)));
 run;
 %put /* TBD */ &=age;
 
@@ -82,7 +79,7 @@ data _null_;
  mVar = tranwrd(usubjid,'-','_');
  call symput(mVar,age);
 run;
-%put /* TBD */;
+%put &=ECHO_031_009;
 
 
 
@@ -108,43 +105,44 @@ run;
 ** A MORE COMPLEX (FUN) EXAMPLE;
 ods select Position;
 proc contents data = dm out = contents varnum; run;
+proc print data = contents; run;
 
 data _null_;
  set contents end=last;
- put _n_= last=;
+ 
+ put _n_ last;
   
+ 
  length typec $4;
  if type = 1 then typec = 'Num';
  else             typec = 'Char';
-
-
  
- call symput(  'var'||strip(put(_n_,best.)), name);
- call symput(  'label'||strip(put(_n_,best.)), label);
- call symput(  'type'||strip(put(_n_,best.)), typec);
+ call symput(  'var'||strip(put(_n_,best.)), strip(name));
+ call symput(  'label'||strip(put(_n_,best.)), strip(label));
+ call symput(  'type'||strip(put(_n_,best.)), strip(typec));
  
-    if last;
+    if last = 1;
 
- call symput('numVars',strip(put(_n_,best.)));
- 
+ call symput(   'numVars'  ,   strip(put(_n_,best.))     );
+
 run;
 
-%put &=var1;
-%put &=label1;
-%put &=type1;
+%put &=var7;
+%put &=label7;
+%put &=type7;
 
 
-
-
-
-
+option nomprint nomlogic nomfile nosymbolgen;
 %macro print;
   %do i = 1 %to &numVars.;
 
-   %put &=i;
-   
+   %put &&var&i;
+   %put &&label&i;
+   %put &&type&i;
    %* How do I print out the macro variables I just created;
+   
 
+  
   %end;
 %mend;
 %print;
@@ -156,22 +154,32 @@ run;
 
 
 
+ filename mprint "&outPath.\macro_print_out.sas";
+ option mlogic symbolgen mprint mfile; 
 
 %macro summary;
   %do i = 1 %to &numVars.;
 
    %put &=i;
-   
+   %put &&var&i;
+   %put &&label&i;
+   %put &&type&i;  
    %* How do summarize the variables in the dataset one at a time using
       the macro variables I just created;
-
-
-     /** Character Variables -- Use PROC FREQ **/
-
-
-     /** Numeric Variables -- Use PROC MEANS **/
-
-
+      
+      %if %upcase(&&type&i) = CHAR  %then %do;
+       title "Frequency Analysis of Variable = &&var&i (&&label&i)";
+       proc freq data = DM;
+        table &&var&i;
+       run;
+      %end;
+      %else %do;
+       title "Analysis of Variable = &&var&i (&&label&i)";
+       proc means data = DM;
+        var &&var&i;
+       run;
+      %end;
+      
   %end;
 %mend;
 %summary;
