@@ -78,7 +78,11 @@ run;
  run;
  quit;
  ods select all;
-
+ 
+ title "Single-Variable Regression Estimates";
+ proc print data = parmEst;
+  where upcase(variable)  ='X_EXPOSURE';
+ run;
 
 
 /*
@@ -90,3 +94,19 @@ run;
        from the regressions by the end
    [5] Print out the regression estimates
 */
+
+%macro linRegA(ds=,Dvar=,covList=);
+
+    %put NOTE: linRegA -- I do not do anything yet!;
+
+%mend;
+%linRegA(ds=work.reg_dat,Dvar=Y,covList=X_COVA|X_COVB|X_COVC);
+
+
+%macro linRegB(ds=,Dvar=,covPrefix=);
+
+    %put NOTE: linRegB -- I do not do anything yet!;
+   
+%mend;
+%linRegB(ds=work.reg_dat,Dvar=Y,covPrefix=X_);
+
