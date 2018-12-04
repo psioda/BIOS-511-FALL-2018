@@ -136,10 +136,45 @@ option mprint;
     proc contents data = &ds. out = contents noprint; run;
     
     data contents;
-     set contents;
+     set contents end=eof;
      where upcase(substr(name,1,2)) = upcase("&covPrefix"); 
+     
+     call symput(  "mv"||strip(put(_n_,best.))    ,   strip(name) );
+     
+     if eof = 1 then call symput('numVar'   ,   strip(put(_n_,10.))   );
+     
     run;
+
+   
+  %do i = 1 %to &numVar;
+    
+     %let cov = &&mv&i;
+     
+	 ods select none;
+     ods output ParameterEstimates = ParmEst&i.;
+     proc reg data = &ds. plots=(none);
+      model &dvar. = &cov. / clb; 
+     run;
+     quit;
+     ods select all;
+    
+    %end;
+    
+    data results;
+     set 
+        %do i = 1 %to &numVar; 
+           ParmEst&i.
+        %end;
+       ;
+       where upcase(variable) ^= "INTERCEPT";
+    run;
+    
+    proc print data = results; run;   
+   
    
 %mend;
 %linRegB(ds=work.reg_dat,Dvar=Y,covPrefix=X_);
-proc print data = contents; run;
+proc print; run;
+
+
+
