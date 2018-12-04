@@ -68,11 +68,12 @@ data reg_dat;
  end;
  drop j;
 run;
+proc print data = reg_dat; run;
 
 
 ** example linear regression code;
  ods select none;
- ods output ParameterEstimates = ParmEst;
+ ods output ParameterEstimates = work.ParmEst;
  proc reg data = reg_dat plots=(none);
   model y = X_EXPOSURE / clb; 
  run;
@@ -97,9 +98,36 @@ run;
 
 %macro linRegA(ds=,Dvar=,covList=);
 
-    %put NOTE: linRegA -- I do not do anything yet!;
-
+	%let numVar = %sysfunc(countw(&covList.,|));
+	/*%put &=numVar;*/
+    %do i = 1 %to &numVar;
+    
+     %let cov = %scan(&covList.,&i.,|);
+     
+	 ods select none;
+     ods output ParameterEstimates = ParmEst&i.;
+     proc reg data = &ds. plots=(none);
+      model &dvar. = &cov. / clb; 
+     run;
+     quit;
+     ods select all;
+    
+    %end;
+    
+    data results;
+     set 
+        %do i = 1 %to &numVar; 
+           ParmEst&i.
+        %end;
+       ;
+       where upcase(variable) ^= "INTERCEPT";
+    run;
+    
+    proc print data = results; run;
+    
+    
 %mend;
+option mprint;
 %linRegA(ds=work.reg_dat,Dvar=Y,covList=X_COVA|X_COVB|X_COVC);
 
 
