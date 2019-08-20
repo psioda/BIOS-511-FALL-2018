@@ -114,16 +114,16 @@ run;
 
 ** Example 7 ****************************************************;
 title "Example 7";
-proc means data = temp noprint /*nway*/;
+proc means data = temp noprint nway;
  class country armcd;
  var age dur;
- output out = DS3 n(dur)=dur mean=mean_age mean_dur std=std_age atd_dur;
+ output out = DS3 n(dur)=dur mean=mean_age mean_dur std(age)=std_age;
 run;
 proc print data = DS3; run;
 
 ** Example 8 ****************************************************;
 title "Example 8";
-proc means data = temp noprint;
+proc means data = temp noprint nway;
  class country armcd;
  var age dur;
  output out = DS4 n(dur)= mean= / autoname;
@@ -132,7 +132,7 @@ proc print data = DS4; run;
 
 ** Example 9 ****************************************************;
 title "Example 9";
-proc means data = temp noprint;
+proc means data = temp noprint nway;
  class country armcd;
  var age dur;
  output out = DS5;
